@@ -64,7 +64,7 @@ const showDetails = (idName) => {
     <div class="card-body">
        <p class="card-text">Name: ${idName.name}</p>
        <p class="card-text">Release Date: ${idName?.releaseDate}</p>
-       <p class="card-text">Sensor: ${idName?.mainFeatures?.sensors[0, 1, 2, 3, 4]}</p>
+       <p class="card-text">Sensor: ${idName?.mainFeatures?.sensors[0, 1, 2, 3]}</p>
        <p class="card-text">Others:
        wlan: ${idName?.others.WLAN}
        bluetooth: ${idName?.others?.Bluetooth}</p>
