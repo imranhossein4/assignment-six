@@ -37,18 +37,25 @@ const details = (idName) => {
     const url = `https://openapi.programming-hero.com/api/phone/${idName}`
     fetch(url)
         .then(res => res.json())
-        .then(data => showDetails(data))
+        .then(data => showDetails(data.data))
 }
 
 // show details 
 const showDetails = (idName) => {
+    console.log(idName)
     const container = document.getElementById('show-details');
     const div = document.createElement('div');
     div.classList.add('card');
     div.innerHTML = `
-    <img src="${idName.data.image}" class="card-img-top img-fluid" alt="...">
+    <img src="${idName.image}" class="card-img-top img-fluid"  alt="...">
     <div class="card-body">
-       <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+       <p class="card-text">Name: ${idName.name}</p>
+       <p class="card-text">Release Date: ${idName?.releaseDate}</p>
+       <p class="card-text">Sensor: ${idName?.mainFeatures?.sensors[0, 1, 2, 3, 4]}</p>
+       <p class="card-text">Others:
+       wlan: ${idName.others.WLAN}
+       bluetooth: ${idName.others.Bluetooth}</p>
+       <p class="card-text"></p>
       </div>
     `;
     container.appendChild(div);
