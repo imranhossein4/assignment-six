@@ -8,27 +8,38 @@ const searchButton = () => {
     fetch(url)
         .then(res => res.json())
         .then(data => displayPhone(data.data))
+
 }
 // disply phone
 const displayPhone = (phones) => {
     const container = document.getElementById('display-phone');
-    phones.forEach(phone => {
-        console.log(phone);
-        const div = document.createElement('div');
-        div.classList.add('col');
-        div.innerHTML = `
-        <div class="card">
-                    <img src="${phone.image}" class=" w-75 card-img-top" alt="...">
-                    <div class="card-body">
-                        <h5 class="card-title">${phone.brand}</h5>
-                        <p class="card-text">${phone.phone_name}</p>
-                        <button onclick="details('${phone.slug}')" class="bg-success px-3 text-white py-1">DETAILS</button>
+    // clear data 
+    container.textContent = '';
+    if (phones.length == 0) {
+        const error2 = document.getElementById('error2');
+        error2.style.display = "block";
+    }
+    else {
+        const slc = phones.slice(0, 20);
+        slc.forEach(phone => {
+            console.log(phone);
+            const div = document.createElement('div');
+            div.classList.add('col');
+            div.innerHTML = `
+            <div class="card">
+                        <img src="${phone.image}" class=" w-75 card-img-top" alt="...">
+                        <div class="card-body">
+                            <h5 class="card-title">${phone.brand}</h5>
+                            <p class="card-text">${phone.phone_name}</p>
+                            <button onclick="details('${phone.slug}')" class="bg-success px-3 text-white py-1">DETAILS</button>
+                        </div>
                     </div>
-                </div>
-        `;
-        container.appendChild(div);
-
-    });
+            `;
+            container.appendChild(div);
+        });
+        const error2 = document.getElementById('error2');
+        error2.style.display = "none";
+    }
 }
 
 // get id name
@@ -53,8 +64,8 @@ const showDetails = (idName) => {
        <p class="card-text">Release Date: ${idName?.releaseDate}</p>
        <p class="card-text">Sensor: ${idName?.mainFeatures?.sensors[0, 1, 2, 3, 4]}</p>
        <p class="card-text">Others:
-       wlan: ${idName.others.WLAN}
-       bluetooth: ${idName.others.Bluetooth}</p>
+       wlan: ${idName?.others.WLAN}
+       bluetooth: ${idName?.others?.Bluetooth}</p>
        <p class="card-text"></p>
       </div>
     `;
