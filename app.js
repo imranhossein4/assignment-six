@@ -22,7 +22,7 @@ const displayPhone = (phones) => {
                     <div class="card-body">
                         <h5 class="card-title">${phone.brand}</h5>
                         <p class="card-text">${phone.phone_name}</p>
-                        <button onclick="showDetails()" class="bg-success px-3 text-white py-1">DETAILS</button>
+                        <button onclick="details('${phone.slug}')" class="bg-success px-3 text-white py-1">DETAILS</button>
                     </div>
                 </div>
         `;
@@ -31,18 +31,26 @@ const displayPhone = (phones) => {
     });
 }
 
-// show details
-const showDetails = () => {
+// get id name
+const details = (idName) => {
+    console.log(idName)
+    const url = `https://openapi.programming-hero.com/api/phone/${idName}`
+    fetch(url)
+        .then(res => res.json())
+        .then(data => showDetails(data))
+}
+
+// show details 
+const showDetails = (idName) => {
     const container = document.getElementById('show-details');
     const div = document.createElement('div');
     div.classList.add('card');
     div.innerHTML = `
-             <img src="${phone.image}" class="card-img-top" alt="...">
-                <div class="card-body">
-                  <p class="card-text"></p>
-                  <p class="card-text"></p>
-                  <p class="card-text"></p>
-                  <p class="card-text"></p>
-                </div>
-`
+    <img src="${idName.data.image}" class="card-img-top img-fluid" alt="...">
+    <div class="card-body">
+       <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+      </div>
+    `;
+    container.appendChild(div);
+
 }
