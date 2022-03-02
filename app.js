@@ -13,7 +13,9 @@ const searchButton = () => {
 // disply phone
 const displayPhone = (phones) => {
     const container = document.getElementById('display-phone');
+    const container2 = document.getElementById('show-details');
     // clear data 
+    container2.textContent = '';
     container.textContent = '';
     if (phones.length == 0) {
         const error2 = document.getElementById('error2');
@@ -53,8 +55,8 @@ const details = (idName) => {
 
 // show details 
 const showDetails = (idName) => {
-    console.log(idName)
     const container = document.getElementById('show-details');
+    container.textContent = '';
     const div = document.createElement('div');
     div.classList.add('card');
     div.innerHTML = `

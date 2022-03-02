@@ -1,6 +1,8 @@
+/* body style  */
 body {
     font-family: 'Roboto', sans-serif;
 }
+/* error handling style  */
 .error{
     display: none;
 }
